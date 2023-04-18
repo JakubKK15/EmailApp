@@ -3,38 +3,36 @@ import java.util.Scanner;
 public class Email {
     private final String firstName;
     private final String lastName;
-    private final String password;
     private final int defaultPasswordLength = 10;
     private final String companySuffix = "abcompany.com";
     private final String email;
+    private String password;
+    private int mailboxCapacity = 500;
     private String department;
     private String altEmail;
-    private int mailboxCapacity;
 
     // Constructor to receive the first and last name
     public Email(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        System.out.println("Email created.");
 
         // Call a method asking for the department - return the department
         this.department = setDepartment();
-        System.out.println("The department is: " + department);
 
         this.password = setRandomPassword(defaultPasswordLength);
-        System.out.println("Your password is: " + password);
+        System.out.println("Password: " + password);
 
         this.email = this.firstName.toLowerCase() + "." +
                 this.lastName.toLowerCase() + "@" +
                 this.department.toLowerCase() + "." +
                 this.companySuffix;
-        System.out.println("Your email is: " + email);
     }
 
     // Ask for the department
 
     private String setDepartment() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("New Worker: " + firstName);
         System.out.print("""
                 DEPARTMENT CODES
                 1) Sales
@@ -50,7 +48,7 @@ public class Email {
         } else if (depChoice == 3) {
             department = "Accounting";
         } else if (depChoice == 0) {
-            department = null;
+            department = "";
         } else {
             System.out.println("Enter a correct number.");
             setDepartment();
@@ -69,10 +67,39 @@ public class Email {
         }
         return new String(password);
     }
-    // Set the mailbox capacity
+
+    // Change the password
+    public void changePassword(String password) {
+        this.password = password;
+    }
 
     // Set the alternate email
 
-    // Change the password
+    public int getMailboxCapacity() {
+        return mailboxCapacity;
+    }
 
+    // Set the mailbox capacity
+    public void setMailboxCapacity(int capacity) {
+        this.mailboxCapacity = capacity;
+    }
+
+    public String getAltEmail() {
+        return altEmail;
+    }
+
+    public void setAltEmail(String altEmail) {
+        this.altEmail = altEmail;
+    }
+
+    @Override
+    public String toString() {
+        return "Info{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", mailboxCapacity=" + mailboxCapacity + "mb" +
+                ", altEmail='" + altEmail + '\'' +
+                '}';
+    }
 }
