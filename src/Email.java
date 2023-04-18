@@ -5,6 +5,8 @@ public class Email {
     private final String lastName;
     private final String password;
     private final int defaultPasswordLength = 10;
+    private final String companySuffix = "abcompany.com";
+    private final String email;
     private String department;
     private String altEmail;
     private int mailboxCapacity;
@@ -21,6 +23,12 @@ public class Email {
 
         this.password = setRandomPassword(defaultPasswordLength);
         System.out.println("Your password is: " + password);
+
+        this.email = this.firstName.toLowerCase() + "." +
+                this.lastName.toLowerCase() + "@" +
+                this.department.toLowerCase() + "." +
+                this.companySuffix;
+        System.out.println("Your email is: " + email);
     }
 
     // Ask for the department
@@ -33,7 +41,7 @@ public class Email {
                 2) Development
                 3) Accounting
                 0) None
-                Choice: """);
+                Choice:\s""");
         int depChoice = scanner.nextInt();
         if (depChoice == 1) {
             department = "Sales";
